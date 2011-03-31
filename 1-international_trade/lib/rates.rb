@@ -16,5 +16,30 @@ end
 
 require 'nokogiri'
 require 'fastercsv'
+require 'bigdecimal'
 
-rates_file = File.open('files/SAMPLE_RATES.xml')
+class CsvTransactionParser
+
+  def initialize(filename)
+  end
+
+  def parse(filename)
+    FasterCSV.foreach(filename) do |row|
+      
+  end
+
+
+end
+
+class XmlRatesParser
+  doc = Nokogiri::XML(File.open('files/SAMPLE_RATES.xml'))
+
+  rates_xml = doc.xpath('//rate')
+end
+class Banker
+
+  def round_banker_style(value)
+    BigDecimal(value.to_s).round(2, BigDecimal::ROUND_HALF_EVEN).to_f
+  end
+
+end
