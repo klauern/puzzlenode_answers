@@ -14,4 +14,7 @@ end
 
 =end
 
+require 'nokogiri'
+require 'fastercsv'
 
+rates_file = File.open('files/SAMPLE_RATES.xml')
