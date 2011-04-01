@@ -21,13 +21,20 @@ require 'bigdecimal'
 class CsvTransactionParser
 
   def initialize(filename)
+    @arrs = parse(filename)
   end
 
   def parse(filename)
-    FasterCSV.foreach(filename) do |row|
-      
+    FasterCSV.read(filename)
   end
 
+  def retrieve_skus(sku)
+    @arrs.select { |ary| ary[1] == sku }
+  end
+
+  def retrieve_stores(store)
+    @arrs.select { |ary| ary[0] == store }
+  end
 
 end
 
@@ -35,9 +42,13 @@ class XmlRatesParser
   doc = Nokogiri::XML(File.open('files/SAMPLE_RATES.xml'))
 
   rates_xml = doc.xpath('//rate')
+
 end
+
 class Banker
 
+
+  
   def round_banker_style(value)
     BigDecimal(value.to_s).round(2, BigDecimal::ROUND_HALF_EVEN).to_f
   end

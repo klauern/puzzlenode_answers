@@ -14,16 +14,36 @@ describe "Parsing Rates.XML" do
 end
 
 describe "parsing trans.csv" do
+  
+  before(:each) do
+    @csv = CsvTransactionParser.new('files/SAMPLE_TRANS.csv')
+  end
 
-  it "should find the currency for every row" 
+  it "should have a mapping of all the stores" do
+    @csv.retrieve_stores("Yonkers").size.should == 2
+    @csv.retrieve_stores("Nahua").size.should == 1
+    @csv.retrieve_stores("Scranton").size.should == 1
+    @csv.retrieve_stores("Camden").size.should == 1
+    @csv.retrieve_stores("BadStore").size.should == 0
+  end
 
-  it "should have a mapping of all the stores"
+  it "should get all sku's from the CSV" do
+    @csv.retrieve_skus("DM1182").size.should == 3
+    @csv.retrieve_skus("DM1210").size.should == 2
+    @csv.retrieve_skus("DM1302").size.should == 0
+  end
+
+end
+
+describe "converting prices to USD" do
+  before(:each) do
+    @banker = Banker.new
+  end
 
   it "should have a mapping of all of the expenses"
 
   it "should maintain a running total in USD for all stores"
 end
-
 
 describe "output.txt file" do
   
