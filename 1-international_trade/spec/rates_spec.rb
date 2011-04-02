@@ -1,11 +1,23 @@
-$: << File.expand_path(File.dirname(__FILE__) + "lib")
-
-require 'rspec'
-require 'rates'
+require 'spec_helper'
 
 describe "Parsing Rates.XML" do
+  
+  before(:each) do
+    @xml_parser = XmlRatesParser.new('files/SAMPLE_RATES.xml')
+    @doc = Nokogiri::XML(File.open('files/SAMPLE_RATES.xml'))
+  end
 
-  it "should store all conversions"
+  it "should get rates XML from a document" do
+    @xml_parser.get_rates_from_xml(@doc)
+  end
+
+  it "should map a 'from' conversion to a 'to' and 'conversion'" do
+    r = @xml_parser.map_rate(@doc.xpath('//rate'))
+    r.class.should == Hash
+    puts r['AUD']
+    r['AUD']['to'].should == "CAD"
+    r['AUD']['conversion'].should == "1.0079"
+  end
 
   it "should know how to convert the reverse of a conversion"
 
@@ -21,7 +33,7 @@ describe "parsing trans.csv" do
 
   it "should have a mapping of all the stores" do
     @csv.retrieve_stores("Yonkers").size.should == 2
-    @csv.retrieve_stores("Nahua").size.should == 1
+    @csv.retrieve_stores("Nashua").size.should == 1
     @csv.retrieve_stores("Scranton").size.should == 1
     @csv.retrieve_stores("Camden").size.should == 1
     @csv.retrieve_stores("BadStore").size.should == 0

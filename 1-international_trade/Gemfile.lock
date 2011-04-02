@@ -2,8 +2,7 @@ GEM
   specs:
     diff-lcs (1.1.2)
     fastercsv (1.5.4)
-    nokogiri (1.4.4.2-java)
-      weakling (>= 0.0.3)
+    nokogiri (1.5.0.beta.4-java)
     rspec (2.5.0)
       rspec-core (~> 2.5.0)
       rspec-expectations (~> 2.5.0)
@@ -12,12 +11,11 @@ GEM
     rspec-expectations (2.5.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.5.0)
-    weakling (0.0.4-java)
 
 PLATFORMS
   java
 
 DEPENDENCIES
   fastercsv
-  nokogiri
+  nokogiri (= 1.5.0.beta.4)
   rspec
