@@ -65,11 +65,40 @@ class XmlRatesParser
     doc.css('rate')
   end
 
+
+  # Map both the to -> from conversion, but also
+  # the from -> to conversion, too
   def map_rate(element, hash={})
-    hash[element.css('from').text] = { 'to' => element.css( 'to' ).text,
-                                       'conversion' => element.css( 'conversion' ).text }
+    from = element.css('from').text
+    to = element.css('to').text
+
+    h = get_hashes(element)
+    if hash[from].nil?
+      hash[from] = [] << h[from]
+    else
+      hash[from] << h[from]
+    end
+    if hash[to].nil?
+      hash[to] = [] << h[to]
+    else
+      hash[to] << h[to]
+    end
     hash
   end
+
+  def get_hashes(element)
+    h = {}
+    h[element.css('from').text] = { :to => element.css('to').text,
+                                   :conversion => element.css('conversion').text }
+    h[element.css('to').text] = { :to => element.css('from').text,
+                                  :conversion => inverse_conversion(element.css('conversion').text) }
+    h
+  end
+
+  def inverse_conversion(string_conversion)
+    BigDecimal.new("1") / BigDecimal.new(string_conversion)
+  end
+
 
   def map_rates(xml)
     rates = {}
@@ -78,6 +107,20 @@ class XmlRatesParser
     }
     rates
   end
+
+  def find_conversion(from, to)
+    @rates[from].each_index { |hash_index|
+      @rates[from][hash_index].each { |k,v|
+        if k == :to && v == to
+          # puts "Found it: #{@rates[from][hash_index][:conversion]}"
+          return @rates[from][hash_index][:conversion]
+        end
+      }
+    }
+  end
+
+
+
 
 end
 
@@ -103,7 +146,15 @@ class Banker
     round_banker_style(amt * conversion)
   end
 
-  def find_conversion_amt(from, to)
+end
+
+
+class RateConverter
+
+  def initialize(hash)
+    @from = create_direct_mapping(hash)
+    @to = reverse_mapping(hash)
+    @from.merge!(@to)
   end
 
 end

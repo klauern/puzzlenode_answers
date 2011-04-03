@@ -13,20 +13,16 @@ describe "XML Parser" do
     rates.class.should == Nokogiri::XML::NodeSet
   end
 
-  it "should map a 'from' conversion to a 'to' and 'conversion'" do
-    r = @xml_parser.map_rate(@doc.css('rate').first)
-    r.class.should == Hash
-    puts r['AUD']
-    r['AUD']['to'].should == "CAD"
-    r['AUD']['conversion'].should == "1.0079"
-  end
-
-
 end
 
 describe "Currency conversion Traversal" do
+  before(:each) do
+    @xml_parser = XmlRatesParser.new('files/SAMPLE_RATES.xml')
+  end
 
-  it "should find a single from->to conversion"
+  it "should find a single from->to conversion" do
+    @xml_parser.find_conversion("AUD", "CAD").should == "1.0079"
+  end
 
   it "should find a single to<-from conversion in reverse"
 

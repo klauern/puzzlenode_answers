@@ -279,13 +279,13 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe '1resize ' . ((&lines * 5 + 17) / 34)
-exe '2resize ' . ((&lines * 26 + 17) / 34)
-exe 'vert 2resize ' . ((&columns * 83 + 83) / 166)
-exe '3resize ' . ((&lines * 10 + 17) / 34)
-exe 'vert 3resize ' . ((&columns * 82 + 83) / 166)
-exe '4resize ' . ((&lines * 15 + 17) / 34)
-exe 'vert 4resize ' . ((&columns * 82 + 83) / 166)
+exe '1resize ' . ((&lines * 4 + 17) / 34)
+exe '2resize ' . ((&lines * 27 + 17) / 34)
+exe 'vert 2resize ' . ((&columns * 82 + 83) / 166)
+exe '3resize ' . ((&lines * 21 + 17) / 34)
+exe 'vert 3resize ' . ((&columns * 83 + 83) / 166)
+exe '4resize ' . ((&lines * 5 + 17) / 34)
+exe 'vert 4resize ' . ((&columns * 83 + 83) / 166)
 argglobal
 setlocal keymap=
 setlocal noarabic
@@ -391,7 +391,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 2) / 5)
+let s:l = 1 - ((0 * winheight(0) + 2) / 4)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -514,12 +514,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 93 - ((11 * winheight(0) + 13) / 26)
+let s:l = 63 - ((23 * winheight(0) + 13) / 27)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-93
-normal! 04l
+63
+normal! 0
 lcd C:\mydocs\Ruby\puzzlenode\1-international_trade
 wincmd w
 argglobal
@@ -637,12 +637,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 81 - ((6 * winheight(0) + 5) / 10)
+let s:l = 11 - ((10 * winheight(0) + 10) / 21)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-81
-normal! 020l
+11
+normal! 0
 lcd C:\mydocs\Ruby\puzzlenode\1-international_trade
 wincmd w
 argglobal
@@ -751,7 +751,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 8 - ((6 * winheight(0) + 7) / 15)
+let s:l = 8 - ((2 * winheight(0) + 2) / 5)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -759,14 +759,13 @@ normal! zt
 normal! 02l
 lcd C:\mydocs\Ruby\puzzlenode\1-international_trade
 wincmd w
-2wincmd w
-exe '1resize ' . ((&lines * 5 + 17) / 34)
-exe '2resize ' . ((&lines * 26 + 17) / 34)
-exe 'vert 2resize ' . ((&columns * 83 + 83) / 166)
-exe '3resize ' . ((&lines * 10 + 17) / 34)
-exe 'vert 3resize ' . ((&columns * 82 + 83) / 166)
-exe '4resize ' . ((&lines * 15 + 17) / 34)
-exe 'vert 4resize ' . ((&columns * 82 + 83) / 166)
+exe '1resize ' . ((&lines * 4 + 17) / 34)
+exe '2resize ' . ((&lines * 27 + 17) / 34)
+exe 'vert 2resize ' . ((&columns * 82 + 83) / 166)
+exe '3resize ' . ((&lines * 21 + 17) / 34)
+exe 'vert 3resize ' . ((&columns * 83 + 83) / 166)
+exe '4resize ' . ((&lines * 5 + 17) / 34)
+exe 'vert 4resize ' . ((&columns * 83 + 83) / 166)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
