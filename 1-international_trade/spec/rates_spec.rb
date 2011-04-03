@@ -24,6 +24,18 @@ describe "XML Parser" do
 
 end
 
+describe "Currency conversion Traversal" do
+
+  it "should find a single from->to conversion"
+
+  it "should find a single to<-from conversion in reverse"
+
+  it "should find an indirect from->to->from conversion"
+
+  it "should find a reverse indirect conversion from<-to<-from"
+
+end
+
 describe "CSV Parser" do
   
   before(:each) do
