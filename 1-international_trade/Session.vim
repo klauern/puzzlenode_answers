@@ -214,7 +214,6 @@ imap  <Plug>Isurround
 let &cpo=s:cpo_save
 unlet s:cpo_save
 set autoindent
-set background=dark
 set backspace=indent,eol,start
 set copyindent
 set encoding=utf-8
@@ -256,13 +255,18 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
 endif
 set shortmess=aoO
 badd +3 Gemfile
-badd +55 lib\rates.rb
+badd +1 lib\rates.rb
 badd +14 spec\rates_spec.rb
-badd +6 files\SAMPLE_TRANS.csv
-badd +10 files\SAMPLE_RATES.xml
+badd +1 files\SAMPLE_TRANS.csv
+badd +8 files\SAMPLE_RATES.xml
+badd +1 files\SAMPLE_OUTPUT.txt
 args .\
-edit lib\rates.rb
+edit files\SAMPLE_TRANS.csv
 set splitbelow splitright
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
 wincmd _ | wincmd |
 vsplit
 1wincmd h
@@ -275,12 +279,128 @@ set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe 'vert 1resize ' . ((&columns * 83 + 83) / 166)
-exe '2resize ' . ((&lines * 21 + 17) / 34)
-exe 'vert 2resize ' . ((&columns * 82 + 83) / 166)
+exe '1resize ' . ((&lines * 5 + 17) / 34)
+exe '2resize ' . ((&lines * 26 + 17) / 34)
+exe 'vert 2resize ' . ((&columns * 83 + 83) / 166)
 exe '3resize ' . ((&lines * 10 + 17) / 34)
 exe 'vert 3resize ' . ((&columns * 82 + 83) / 166)
+exe '4resize ' . ((&lines * 15 + 17) / 34)
+exe 'vert 4resize ' . ((&columns * 82 + 83) / 166)
 argglobal
+setlocal keymap=
+setlocal noarabic
+setlocal autoindent
+setlocal balloonexpr=
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal colorcolumn=
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=/*%s*/
+setlocal complete=.,w,b,u,t,i
+setlocal concealcursor=
+setlocal conceallevel=0
+setlocal completefunc=
+setlocal copyindent
+setlocal cryptmethod=
+setlocal nocursorbind
+setlocal nocursorcolumn
+setlocal nocursorline
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal expandtab
+if &filetype != ''
+setlocal filetype=
+endif
+setlocal foldcolumn=0
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+setlocal foldmethod=manual
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatexpr=
+setlocal formatoptions=qrn1
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal grepprg=
+setlocal iminsert=2
+setlocal imsearch=2
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+set list
+setlocal list
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal numberwidth=4
+setlocal omnifunc=
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal quoteescape=\\
+setlocal noreadonly
+set relativenumber
+setlocal relativenumber
+setlocal norightleft
+setlocal rightleftcmd=search
+setlocal noscrollbind
+setlocal shiftwidth=2
+setlocal noshortname
+setlocal smartindent
+setlocal softtabstop=2
+setlocal nospell
+setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
+setlocal spellfile=
+setlocal spelllang=en
+setlocal statusline=
+setlocal suffixesadd=
+setlocal swapfile
+setlocal synmaxcol=3000
+if &syntax != ''
+setlocal syntax=
+endif
+setlocal tabstop=8
+setlocal tags=
+setlocal textwidth=79
+setlocal thesaurus=
+setlocal noundofile
+setlocal nowinfixheight
+setlocal nowinfixwidth
+setlocal wrap
+setlocal wrapmargin=0
+silent! normal! zE
+let s:l = 1 - ((0 * winheight(0) + 2) / 5)
+if s:l < 1 | let s:l = 1 | endif
+exe s:l
+normal! zt
+1
+normal! 0
+lcd C:\mydocs\Ruby\puzzlenode\1-international_trade
+wincmd w
+argglobal
+edit C:\mydocs\Ruby\puzzlenode\1-international_trade\lib\rates.rb
 nnoremap <buffer> <silent> g} :exe        "ptjump =RubyCursorIdentifier()"
 nnoremap <buffer> <silent> } :exe          "ptag =RubyCursorIdentifier()"
 nnoremap <buffer> <silent> g] :exe      "stselect =RubyCursorIdentifier()"
@@ -356,7 +476,7 @@ setlocal modeline
 setlocal modifiable
 setlocal nrformats=octal,hex
 set number
-setlocal number
+setlocal nonumber
 setlocal numberwidth=4
 setlocal omnifunc=rubycomplete#Complete
 setlocal path=.,C:/Ruby192/lib/ruby/site_ruby/1.9.1,C:/Ruby192/lib/ruby/site_ruby/1.9.1/i386-msvcrt,C:/Ruby192/lib/ruby/site_ruby,C:/Ruby192/lib/ruby/vendor_ruby/1.9.1,C:/Ruby192/lib/ruby/vendor_ruby/1.9.1/i386-msvcrt,C:/Ruby192/lib/ruby/vendor_ruby,C:/Ruby192/lib/ruby/1.9.1,C:/Ruby192/lib/ruby/1.9.1/i386-mingw32,C:/Ruby192/lib/ruby/gems/1.9.1/gems/ZenTest-4.5.0/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/abstract-1.0.0/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/actionmailer-3.0.5/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/activemodel-3.0.5/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/activerecord-3.0.5/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/activeresource-3.0.5/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/activesupport-3.0.5/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/alias-0.2.2/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/arel-2.0.9/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/async-rack-0.5.1/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/autotest-4.4.6/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/awesome_
@@ -394,12 +514,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 36 - ((27 * winheight(0) + 16) / 32)
+let s:l = 93 - ((11 * winheight(0) + 13) / 26)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-36
-normal! 0
+93
+normal! 04l
 lcd C:\mydocs\Ruby\puzzlenode\1-international_trade
 wincmd w
 argglobal
@@ -479,7 +599,7 @@ setlocal modeline
 setlocal modifiable
 setlocal nrformats=octal,hex
 set number
-setlocal number
+setlocal nonumber
 setlocal numberwidth=4
 setlocal omnifunc=rubycomplete#Complete
 setlocal path=.,C:/Ruby192/lib/ruby/site_ruby/1.9.1,C:/Ruby192/lib/ruby/site_ruby/1.9.1/i386-msvcrt,C:/Ruby192/lib/ruby/site_ruby,C:/Ruby192/lib/ruby/vendor_ruby/1.9.1,C:/Ruby192/lib/ruby/vendor_ruby/1.9.1/i386-msvcrt,C:/Ruby192/lib/ruby/vendor_ruby,C:/Ruby192/lib/ruby/1.9.1,C:/Ruby192/lib/ruby/1.9.1/i386-mingw32,C:/Ruby192/lib/ruby/gems/1.9.1/gems/ZenTest-4.5.0/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/abstract-1.0.0/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/actionmailer-3.0.5/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/actionpack-3.0.5/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/activemodel-3.0.5/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/activerecord-3.0.5/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/activeresource-3.0.5/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/activesupport-3.0.5/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/alias-0.2.2/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/arel-2.0.9/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/async-rack-0.5.1/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/autotest-4.4.6/lib,C:/Ruby192/lib/ruby/gems/1.9.1/gems/awesome_
@@ -517,12 +637,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 14 - ((9 * winheight(0) + 10) / 21)
+let s:l = 81 - ((6 * winheight(0) + 5) / 10)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-14
-normal! 0
+81
+normal! 020l
 lcd C:\mydocs\Ruby\puzzlenode\1-international_trade
 wincmd w
 argglobal
@@ -593,7 +713,7 @@ setlocal modeline
 setlocal modifiable
 setlocal nrformats=octal,hex
 set number
-setlocal number
+setlocal nonumber
 setlocal numberwidth=4
 setlocal omnifunc=xmlcomplete#CompleteTags
 setlocal path=
@@ -631,19 +751,22 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 8 - ((6 * winheight(0) + 5) / 10)
+let s:l = 8 - ((6 * winheight(0) + 7) / 15)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 8
-normal! 0
+normal! 02l
 lcd C:\mydocs\Ruby\puzzlenode\1-international_trade
 wincmd w
-exe 'vert 1resize ' . ((&columns * 83 + 83) / 166)
-exe '2resize ' . ((&lines * 21 + 17) / 34)
-exe 'vert 2resize ' . ((&columns * 82 + 83) / 166)
+2wincmd w
+exe '1resize ' . ((&lines * 5 + 17) / 34)
+exe '2resize ' . ((&lines * 26 + 17) / 34)
+exe 'vert 2resize ' . ((&columns * 83 + 83) / 166)
 exe '3resize ' . ((&lines * 10 + 17) / 34)
 exe 'vert 3resize ' . ((&columns * 82 + 83) / 166)
+exe '4resize ' . ((&lines * 15 + 17) / 34)
+exe 'vert 4resize ' . ((&columns * 82 + 83) / 166)
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
