@@ -1,7 +1,9 @@
 GEM
+  remote: http://rubygems.org/
   specs:
     diff-lcs (1.1.2)
     fastercsv (1.5.4)
+    nokogiri (1.5.0.beta.4)
     nokogiri (1.5.0.beta.4-java)
     rspec (2.5.0)
       rspec-core (~> 2.5.0)
@@ -14,6 +16,7 @@ GEM
 
 PLATFORMS
   java
+  ruby
 
 DEPENDENCIES
   fastercsv

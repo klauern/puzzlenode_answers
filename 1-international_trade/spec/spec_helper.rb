@@ -9,6 +9,9 @@ Spork.prefork do
 
 require 'rspec'
 require 'rates'
+require 'csv_parser'
+require 'xml_parser'
+require 'banker'
 
 end
 
