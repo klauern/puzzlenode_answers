@@ -8,7 +8,7 @@ Spork.prefork do
   # need to restart spork for it take effect.
 
 require 'rspec'
-require 'lib/rates'
+require 'rates'
 
 end
 

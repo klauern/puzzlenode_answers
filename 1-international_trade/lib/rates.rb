@@ -3,7 +3,12 @@ unless RUBY_PLATFORM != "java"
 end
 require 'nokogiri'
 
-require 'fastercsv'
+if RUBY_VERSION =~ /1.8/
+  require 'fastercsv'
+  CSV = FasterCSV # Ruby 1.9 uses FasterCSV as the CSV parser, so we just alias it for 1.8 to make things easier.
+else
+  require 'csv'
+end
 require 'bigdecimal'
 
 class CsvTransactionParser
@@ -13,7 +18,7 @@ class CsvTransactionParser
   end
 
   def parse(filename)
-    FasterCSV.read(filename)
+    CSV.read(filename)
   end
 
   def retrieve_skus(sku)
@@ -86,7 +91,7 @@ class Banker
   end
 
   def round_banker_style(value)
-    BigDecimal(value.to_s).round(2, BigDecimal::ROUND_HALF_EVEN).to_s(2)
+    BigDecimal(value.to_s).round(2, BigDecimal::ROUND_HALF_EVEN).to_f
   end
 
   def convert(amt, currency)
