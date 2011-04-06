@@ -69,11 +69,11 @@ class XmlRatesParser
   end
 
   def get_hashes(element)
-    h = {}
-    h[element.css('from').text] = { :to => element.css('to').text,
-                                   :conversion => element.css('conversion').text }
-    h[element.css('to').text] = { :to => element.css('from').text,
-                                  :conversion => inverse_conversion(element.css('conversion').text) }
+    h = { element.css('from').text => { :to => element.css('to').text,
+                                        :conversion => element.css('conversion').text },
+          element.css('to').text   => { :to => element.css('from').text,
+                                        :conversion => inverse_conversion(element.css('conversion').text) }
+        }
     h
   end
 
@@ -96,7 +96,30 @@ class XmlRatesParser
         if k == :to && v == to
           # puts "Found it: #{@rates[from][hash_index][:conversion]}"
           return @rates[from][hash_index][:conversion]
+        else
+          find_deeper(to, @rates[from].keys)
         end
+
+      }
+    }
+  end
+
+
+  # to = what we're looking for
+  # possibles = what we have yet to prune out
+  # tried = what we know doesn't have a direct mapping to the 'to' element
+  def find_path(to, hash, possibles, tried=[])
+    whats_left = possibles - tried                  # 1 get a list of things we haven't done yet
+    whats_left.each { |e|                           # 2 try them all out
+      hash[e].each_index { |hash_index|
+        hash[e][hash_index].each { |k,v|          # 3 pull from the authority @rates hash
+          tried << k                                # tried has our ordered list of conversions to apply
+          if k == to && v == to                     # 4 if @rates[this_index] has a to and hte value is to
+            return tried
+          else
+            find_path(to, hash, hash[k].keys, tried)
+          end
+        }
       }
     }
   end

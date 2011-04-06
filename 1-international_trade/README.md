@@ -24,5 +24,7 @@ Notes (from me):
     mapping
   * Indirect mappings can be anywhere, including reversing it to get what you
     need
+  * finding the shortest conversion path FROM -> 1..n intermediate -> TO, could
+    involve graph data structures or trie structures
 
 [1]; http://www.puzzlenode.com/puzzles/2

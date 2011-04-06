@@ -1,20 +1,5 @@
 require 'spec_helper'
 
-describe "XML Parser" do
-  
-  before(:each) do
-    @xml_parser = XmlRatesParser.new('files/SAMPLE_RATES.xml')
-    @doc = Nokogiri::XML(File.open('files/SAMPLE_RATES.xml'))
-  end
-
-  it "should get rates XML from a document" do
-    rates = @xml_parser.get_rates_from_xml(@doc)
-    rates.size.should == 3
-    rates.class.should == Nokogiri::XML::NodeSet
-  end
-
-end
-
 describe "Currency conversion Traversal" do
   before(:each) do
     @xml_parser = XmlRatesParser.new('files/SAMPLE_RATES.xml')

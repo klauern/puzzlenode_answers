@@ -1,7 +1,6 @@
 require 'csv_parser'
 require 'xml_parser'
 
-
 class Banker
 
   attr_accessor :rates, :transactions, :xml_parser, :csv_parser
