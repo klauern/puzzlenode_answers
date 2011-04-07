@@ -6,21 +6,12 @@ require 'bigdecimal'
 
 class XmlRatesParser
 
-
-  # not sure how to style the data for this:
-  # could do something like this:
-  # Data = {}
-  # Data[from] = {to, value}
-  # then to retrieve a conversion to reverse something, I would start
-  # by looking for a Data[from] and if that doesn't find something,
-  # reverse it by looking for a data[to] and dividing it by the value
-  # to data[from]
   def initialize(filepath)
     @doc = create_doc(filepath)
-    create_rates
+    create_rates_hash
   end
 
-  def create_rates
+  def create_rates_hash
     xml = get_rates_from_xml(@doc)
     @rates = map_rates(xml)
   end
@@ -34,19 +25,13 @@ class XmlRatesParser
   end
 
 
-=begin
- This was getting messy before I slept on it
-
- The structure should be a hash of hashes, NOT a hash of arrays of hashes. There's no benefit in storing the second hash in an array because you can simply use it directly like so:
-
- h = {}
- h['USD'] = { 'CAD' => 1.0779, 'AUD' => 1.0779 }, etc., etc.
-
- where before we were messing about with a pretty awful mapping that inevitably doubled up entries where they would have just been overwritten in this case.
-
- Also, there should be some effort in making a simple trie structure to hold the paths possible to get from one conversion to another.  I don't know what the effort entails, but it seems straightforward to me
-
-=end
+  def map_rates(xml)
+    rates = {}
+    xml.each { |r|
+      map_rate(r, rates)
+    }
+    rates
+  end
 
   # Map both the to -> from conversion, but also
   # the from -> to conversion, too
@@ -56,24 +41,23 @@ class XmlRatesParser
 
     h = get_hashes(element)
     if hash[from].nil?
-      hash[from] = [] << h[from]
+      hash[from] = h[from]
     else
-      hash[from] << h[from]
+      hash[from].merge h[from]
     end
     if hash[to].nil?
-      hash[to] = [] << h[to]
+      hash[to] = h[to]
     else
-      hash[to] << h[to]
+      hash[to].merge h[to]
     end
     hash
   end
+  
 
   def get_hashes(element)
-    h = { element.css('from').text => { :to => element.css('to').text,
-                                        :conversion => element.css('conversion').text },
-          element.css('to').text   => { :to => element.css('from').text,
-                                        :conversion => inverse_conversion(element.css('conversion').text) }
-        }
+    h = {}
+    h[element.css('from').text] = { element.css('to').text => BigDecimal(element.css('conversion').text) }
+    h[element.css('to').text] = { element.css('from').text => inverse_conversion(element.css('conversion').text) }
     h
   end
 
@@ -81,14 +65,6 @@ class XmlRatesParser
     BigDecimal.new("1") / BigDecimal.new(string_conversion)
   end
 
-
-  def map_rates(xml)
-    rates = {}
-    xml.each { |r|
-      map_rate(r, rates)
-    }
-    rates
-  end
 
   def find_conversion(from, to)
     @rates[from].each_index { |hash_index|

@@ -17,12 +17,19 @@ describe "XML Parser" do
   describe "creating Hashes from rates" do
 
     it "should create a conversion for simple XML elements" do
-      xml = "<rate><from>USD</from><to>CAD</to><conversion>1.0799</conversion></rate>"
+      xml = Nokogiri::XML("<rate><from>USD</from><to>CAD</to><conversion>1.0799</conversion></rate>")
       hashes = @xml_parser.get_hashes(xml)
-      hashes['USD']['CAD']:
+      hashes['USD']['CAD'].should == BigDecimal('1.0799')
+      hashes['CAD']['USD'].should == BigDecimal('1') / BigDecimal('1.0799')
     end
+
   end
 
+  describe "with path traversal" do
+
+    it "should find a path FROM => TO"
+      
+  end
 
 end
 
