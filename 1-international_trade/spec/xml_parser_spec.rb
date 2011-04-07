@@ -27,7 +27,11 @@ describe "XML Parser" do
 
   describe "with path traversal" do
 
-    it "should find a path FROM => TO"
+    it "should find a direct path from AUD to CAD"
+
+    it "should find a direct reverse path from CAD to AUD"
+
+    it "should find an indirect path from AUD to USD"
       
   end
 
