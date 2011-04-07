@@ -67,10 +67,12 @@ class XmlRatesParser
 
 
   def find_conversion(from, to)
+    conversion_path = [ from ]
     @rates[from].each_index { |hash_index|
       @rates[from][hash_index].each { |k,v|
         if k == :to && v == to
           # puts "Found it: #{@rates[from][hash_index][:conversion]}"
+          return conversion_path << to
           return @rates[from][hash_index][:conversion]
         else
           find_deeper(to, @rates[from].keys)

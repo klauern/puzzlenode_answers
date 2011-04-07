@@ -27,11 +27,20 @@ describe "XML Parser" do
 
   describe "with path traversal" do
 
-    it "should find a direct path from AUD to CAD"
+    it "should find a direct path from AUD to CAD" do
+      path = @xml_parser.find_conversion("AUD", "CAD")
+      path.should == [ "AUD", "CAD" ]
+    end
 
-    it "should find a direct reverse path from CAD to AUD"
+    it "should find a direct reverse path from CAD to AUD" do
+      path = @xml_parser.find_conversion("CAD", "AUD")
+      path.should == [ "CAD", "AUD" ]
+    end
 
-    it "should find an indirect path from AUD to USD"
+    it "should find an indirect path from AUD to USD" do
+      path = @xml_parser.find_conversion("AUD", "USD")
+      path.should == [ "AUD", "CAD", "USD" ]
+    end
       
   end
 
