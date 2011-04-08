@@ -1,22 +1,5 @@
 require 'spec_helper'
 
-describe "Currency conversion Traversal" do
-  before(:each) do
-    @xml_parser = XmlRatesParser.new('files/SAMPLE_RATES.xml')
-  end
-
-  it "should find a single from->to conversion" do
-    @xml_parser.find_conversion("AUD", "CAD").should == "1.0079"
-  end
-
-  it "should find a single to<-from conversion in reverse"
-
-  it "should find an indirect from->to->from conversion"
-
-  it "should find a reverse indirect conversion from<-to<-from"
-
-end
-
 describe "CSV Parser" do
   
   before(:each) do

@@ -5,6 +5,7 @@ require 'nokogiri'
 require 'bigdecimal'
 
 class XmlRatesParser
+  attr_accessor :doc, :rates
 
   def initialize(filepath)
     @doc = create_doc(filepath)
@@ -43,12 +44,12 @@ class XmlRatesParser
     if hash[from].nil?
       hash[from] = h[from]
     else
-      hash[from].merge h[from]
+      hash[from].merge! h[from]
     end
     if hash[to].nil?
       hash[to] = h[to]
     else
-      hash[to].merge h[to]
+      hash[to].merge! h[to]
     end
     hash
   end
@@ -56,7 +57,10 @@ class XmlRatesParser
 
   def get_hashes(element)
     h = {}
+    from = 
+    #puts "mapping from -> to: #{element.css('from').text} => #{element.css('to').text} = #{BigDecimal(element.css('conversion').text)}"
     h[element.css('from').text] = { element.css('to').text => BigDecimal(element.css('conversion').text) }
+    #puts "mapping to -> from:#{element.css('to').text} => #{element.css('from').text} = #{inverse_conversion(element.css('conversion').text)}" 
     h[element.css('to').text] = { element.css('from').text => inverse_conversion(element.css('conversion').text) }
     h
   end
@@ -66,39 +70,41 @@ class XmlRatesParser
   end
 
 
-  def find_conversion(from, to)
-    conversion_path = [ from ]
-    @rates[from].each { |k,v|
-      if k == to
-        return conversion_path << to
-      else
-        find_path(to, @rates, @rates[from].keys)
-      end
-    }
-  end
-
-
-  # to = what we're looking for
-  # possibles = what we have yet to prune out
-  # tried = what we know doesn't have a direct mapping to the 'to' element
-  def find_path(to, hash, possibles, tried=[])
-    whats_left = possibles - tried
-    whats_left.each { |e|
-      hash[e].each { |k,v|
-        if k == to
-          tried << k
-          return tried
-        else
-          tried << k
-          find_path(to, hash, hash[k].keys, tried)
+  # Brute force method, depth search tops out at 3, meaning
+  # you only get [FROM, INTERMEDIATE, TO] for your maximum depth of
+  # answers.
+  # TODO: Increase depth of search
+  # TODO: Refactor like crazy
+  # TODO: Handle bad conversions? ("US" isn't mapped, should throw exception?)
+  def find_conversion_path(from, to)
+    path = [ from ]
+    next_step = @rates[from].keys
+    if next_step.include? to
+      path << to
+      return path
+    else
+      path = next_step.each { |d|
+        if @rates[d].keys.include? to
+          path << d
+          path << to
+          return path
         end
       }
-    }
+      unless path.size == 1 # we didn't find anything in 2nd tier, going 3rd
+        paths = [] # container for array of possible paths, all starting with [from]
+        next_step.each { |d|
+          p = Array.new(path)
+          p << d
+          paths << p
+        }
+        paths.each { |pa|
+          if @rates[pa[-1]].keys.include? to
+            path << pa[-1]
+            path << to
+            return path
+          end
+        } # no 3rd-tier find of the 'to' element, things are getting messy
+      end
+    end
   end
-
-
-
-
 end
-
-

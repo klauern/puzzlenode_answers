@@ -16,11 +16,13 @@ class Banker
 
   def convert(amt, currency)
     unless currency == "USD"
-      conversion = find_conversion_amt(currency, "USD")
+      path = @xml_parser.find_conversion_path(currency, "USD")
+      #conversion = find_conversion_amt(currency, "USD")
     else
       conversion = 1 
     end
     round_banker_style(amt * conversion)
   end
+
 
 end

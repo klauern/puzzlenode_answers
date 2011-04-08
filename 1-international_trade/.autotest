@@ -1,5 +1,8 @@
 require 'autotest/growl'
 Autotest.add_hook :initialize do |autotest|
+  %w{.git .DS_Store ._* *swp}.each do |exception|
+    autotest.add_exception(exception)
+  end
   autotest.add_mapping(/^spec\/.*\.rb$/) do
     autotest.files_matching(/^spec\/.*\.rb$/)
   end
