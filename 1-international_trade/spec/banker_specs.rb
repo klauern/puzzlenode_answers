@@ -1,11 +1,11 @@
 describe "Banker" do
-  
-  describe "and rounding" do
     before(:each) do
       @rate_f = "files/SAMPLE_RATES.xml"
       @trans_f = "files/SAMPLE_TRANS.csv"
       @bank = Banker.new(@rate_f, @trans_f)
     end
+  
+  describe "and rounding" do
     
     it "should round various decimals to proper bankers rounding format" do
       @bank.round_banker_style("1.45453626").should == 1.45
@@ -31,6 +31,8 @@ describe "Banker" do
 
   end
 
-  it "should return a single total amount in USD for a given sku"
+  it "should return a single total amount in USD for a given sku" do
+    @bank.sum_totals("DM1182").should == BigDecimal("134.22")
+  end
 
 end

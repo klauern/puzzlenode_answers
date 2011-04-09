@@ -51,4 +51,16 @@ class Banker
     return v
   end
 
+  # Sums the transactions in USD
+  def sum_totals(sku)
+    skus = @csv_parser.retrieve_skus(sku)
+    trans_in_usd = []
+    skus.each { |ary|
+      trans, cur = ary[2].split
+      trans_in_usd << to_usd(trans, cur)
+    }
+    answer = trans_in_usd.reduce(:+)
+    puts "Answer is #{answer} and class is #{answer.class}"
+    answer
+  end
 end
