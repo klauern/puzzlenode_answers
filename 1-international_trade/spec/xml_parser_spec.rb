@@ -57,15 +57,11 @@ describe "XML Parser" do
       end
 
       it "should handle a large array of elements" do
-        begin
           @rates_xml_prod.rates.keys.each { |key|
             puts "Find #{key} -> USD"
             @rates_xml_prod.find_conversion_path(key, "USD") unless key == "USD"
           }
-        rescue e
-          puts "Couldn't find path from #{key} to USD"
-          puts e
-        end
+          @rates_xml_prod.rates.size.should == 4 # 4 currencies
       end
 
       it "should find all EUR and AUD conversions" do
