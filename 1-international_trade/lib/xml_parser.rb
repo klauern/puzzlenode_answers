@@ -18,7 +18,7 @@ class XmlRatesParser
   end
 
   def create_doc(filepath)
-    Nokogiri::XML(File.open('files/SAMPLE_RATES.xml'))
+    Nokogiri::XML(File.open(filepath))
   end
 
   def get_rates_from_xml(doc)
