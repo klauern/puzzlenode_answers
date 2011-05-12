@@ -25,4 +25,14 @@ Notes (from me):
   * Indirect mappings can be anywhere, including reversing it to get what you
     need
 
+Running the tests:
+------------------
+You'll need `autotest` and possibly `spork` if you're so inclined.  It boils
+down to this:
+
+    $ bundle install
+    $ autotest
+
+
+
 [1]: http://www.puzzlenode.com/puzzles/2
