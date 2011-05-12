@@ -1,6 +1,6 @@
 Information
 ===========
-See [1][PuzzleNode] for more information on this problem, but it boils down to this:
+See [PuzzleNode][1] for more information on this problem, but it boils down to this:
 
 Given an XML with currency conversions and a CSV file with transactions for
 various stores with an amount and a currency, convert transactions to
