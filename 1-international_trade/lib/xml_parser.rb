@@ -99,21 +99,19 @@ class XmlRatesParser
           return path
         end
       }
-      unless path.size == 1 # we didn't find anything in 2nd tier, going 3rd
-        paths = [] # container for array of possible paths, all starting with [from]
-        next_step.each { |d|
-          p = Array.new(path)
-          p << d
-          paths << p
-        }
-        paths.each { |pa|
-          if @rates[pa[-1]].keys.include? to
-            path << pa[-1]
-            path << to
-            return path
-          end
-        } # no 3rd-tier find of the 'to' element, things are getting messy
-      end
+      #unless path.size == 1 # we didn't find anything in 2nd tier, going 3rd
+        #paths = [] # container for array of possible paths, all starting with [from]
+        #next_step.each { |d|
+          #paths << [ d ]
+        #}
+        #paths.each { |pa|
+          #if @rates[pa[-1]].keys.include? to
+            #path << pa[-1]
+            #path << to
+            #return path
+          #end
+        #} # no 3rd-tier find of the 'to' element, things are getting messy
+      #end
     end
   end
 end
