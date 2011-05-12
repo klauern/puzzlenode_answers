@@ -1,6 +1,6 @@
 Information
 ===========
-See [PuzzleNode][1] for more information on this problem, but it boils down to this:
+See [1][PuzzleNode] for more information on this problem, but it boils down to this:
 
 Given an XML with currency conversions and a CSV file with transactions for
 various stores with an amount and a currency, convert transactions to
@@ -25,4 +25,4 @@ Notes (from me):
   * Indirect mappings can be anywhere, including reversing it to get what you
     need
 
-[1]; http://www.puzzlenode.com/puzzles/2
+[1]: http://www.puzzlenode.com/puzzles/2
