@@ -1,5 +1,5 @@
 source :rubygems
-gem "nokogiri", "=1.5.0.beta.4"
+gem "nokogiri", ">=1.5.0"
 gem "fastercsv"
 gem "rspec"
 gem "autotest"

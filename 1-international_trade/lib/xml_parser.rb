@@ -1,5 +1,5 @@
 unless RUBY_PLATFORM != "java"
-  gem "nokogiri", "=1.5.0.beta.4" # earlier version threw Java hardcore errors
+  gem "nokogiri", "=1.5.0" # earlier version threw Java hardcore errors
 end
 require 'nokogiri'
 require 'bigdecimal'
@@ -24,8 +24,7 @@ class XmlRatesParser
   def get_rates_from_xml(doc)
     doc.css('rate')
   end
-
-
+  
   def map_rates(xml)
     rates = {}
     xml.each { |r|

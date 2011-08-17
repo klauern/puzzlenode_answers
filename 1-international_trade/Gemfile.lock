@@ -7,8 +7,7 @@ GEM
     autotest-growl (0.2.9)
     diff-lcs (1.1.2)
     fastercsv (1.5.4)
-    nokogiri (1.5.0.beta.4)
-    nokogiri (1.5.0.beta.4-java)
+    nokogiri (1.5.0-java)
     rspec (2.5.0)
       rspec-core (~> 2.5.0)
       rspec-expectations (~> 2.5.0)
@@ -27,6 +26,6 @@ DEPENDENCIES
   autotest
   autotest-growl
   fastercsv
-  nokogiri (= 1.5.0.beta.4)
+  nokogiri (>= 1.5.0)
   rspec
   spork (= 0.9.0.rc4)
