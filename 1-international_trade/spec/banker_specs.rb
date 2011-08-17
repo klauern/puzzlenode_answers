@@ -1,11 +1,11 @@
 describe "Banker" do
-  
-  describe "and rounding" do
     before(:each) do
       @rate_f = "files/SAMPLE_RATES.xml"
       @trans_f = "files/SAMPLE_TRANS.csv"
       @bank = Banker.new(@rate_f, @trans_f)
     end
+  
+  describe "and rounding" do
     
     it "should round various decimals to proper bankers rounding format" do
       @bank.round_banker_style("1.45453626").should == 1.45
@@ -19,24 +19,20 @@ describe "Banker" do
     describe "with conversions" do
 
       it "should not calculate the value of anything passed in as USD" do
-        @bank.convert("70.00", "USD").should == 70.0
+        @bank.to_usd("70.00", "USD").should == BigDecimal.new("70.0")
       end
 
       it "should calculate foreign currencies to USD" do
-        @bank.convert("70.00", "CAD").should == 70.63
-        @bank.convert("100.00", "AUD").should == 101.7
+        @bank.to_usd("70.00", "CAD").should == BigDecimal("70.63")
+        @bank.to_usd("100.00", "AUD").should == BigDecimal("101.7")
       end
 
     end
 
   end
 
-  it "should result in a single total number for a given sku"
-
-  it "should know how to convert from one currency to USD"
-
-  it "should know how to convert the reverse of a conversion"
-
-  it "should find a conversion that isn't directly mapped"
+  it "should return a single total amount in USD for a given sku" do
+    @bank.sum_totals("DM1182").should == BigDecimal("134.22")
+  end
 
 end

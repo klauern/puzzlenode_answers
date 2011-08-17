@@ -51,6 +51,29 @@ describe "XML Parser" do
       path.should == [ "AUD", "CAD", "USD" ]
     end
 
+    describe "using RATES.xml" do
+      before(:each) do
+        @rates_xml_prod = XmlRatesParser.new('files/RATES.xml')
+      end
+
+      it "should handle a large array of elements" do
+        @rates_xml_prod.rates.keys.each { |key|
+          puts "Find #{key} -> USD"
+          unless key == "USD"
+            @rates_xml_prod.find_conversion_path(key, "USD") 
+          end
+        }
+        @rates_xml_prod.rates.size.should == 4 # 4 currencies
+      end
+
+      it "should find all EUR and AUD conversions" do
+        aud = @rates_xml_prod.find_conversion_path("AUD", "USD")
+        aud.should == [ "AUD", "CAD", "USD" ]
+        eur = @rates_xml_prod.find_conversion_path("EUR", "USD")
+        eur.should == [ "EUR", "AUD", "CAD", "USD" ]
+      end
+    end   
+
   end
 
 end

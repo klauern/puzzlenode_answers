@@ -18,7 +18,7 @@ class XmlRatesParser
   end
 
   def create_doc(filepath)
-    Nokogiri::XML(File.open('files/SAMPLE_RATES.xml'))
+    Nokogiri::XML(File.open(filepath))
   end
 
   def get_rates_from_xml(doc)
@@ -36,8 +36,8 @@ class XmlRatesParser
   # Map both the to -> from conversion, but also
   # the from -> to conversion, too
   def map_rate(element, hash={})
-    from = element.css('from').text
-    to = element.css('to').text
+    from = element_for(element, 'from')
+    to = element_for(element, 'to')
 
     h = get_hashes(element)
     if hash[from].nil?
@@ -56,12 +56,21 @@ class XmlRatesParser
 
   def get_hashes(element)
     h = {}
-    from = 
-    #puts "mapping from -> to: #{element.css('from').text} => #{element.css('to').text} = #{BigDecimal(element.css('conversion').text)}"
-    h[element.css('from').text] = { element.css('to').text => BigDecimal(element.css('conversion').text) }
-    #puts "mapping to -> from:#{element.css('to').text} => #{element.css('from').text} = #{inverse_conversion(element.css('conversion').text)}" 
-    h[element.css('to').text] = { element.css('from').text => inverse_conversion(element.css('conversion').text) }
+    from, to, conversion = get_rate_elements(element)
+    h[from] = { to => BigDecimal(conversion) }
+    h[to] = { from => inverse_conversion(conversion) }
     h
+  end
+
+  def get_rate_elements(xml)
+    from_text = element_for(xml, 'from')
+    to_text = element_for(xml, 'to')
+    conversion = element_for(xml, 'conversion')
+    return [from_text, to_text, conversion]
+  end
+
+  def element_for(xml, css_elem)
+    xml.css(css_elem).text
   end
 
   def inverse_conversion(string_conversion)
@@ -89,21 +98,19 @@ class XmlRatesParser
           return path
         end
       }
-      unless path.size == 1 # we didn't find anything in 2nd tier, going 3rd
-        paths = [] # container for array of possible paths, all starting with [from]
-        next_step.each { |d|
-          p = Array.new(path)
-          p << d
-          paths << p
-        }
-        paths.each { |pa|
-          if @rates[pa[-1]].keys.include? to
-            path << pa[-1]
-            path << to
-            return path
-          end
-        } # no 3rd-tier find of the 'to' element, things are getting messy
-      end
+      #unless path.size == 1 # we didn't find anything in 2nd tier, going 3rd
+        #paths = [] # container for array of possible paths, all starting with [from]
+        #next_step.each { |d|
+          #paths << [ d ]
+        #}
+        #paths.each { |pa|
+          #if @rates[pa[-1]].keys.include? to
+            #path << pa[-1]
+            #path << to
+            #return path
+          #end
+        #} # no 3rd-tier find of the 'to' element, things are getting messy
+      #end
     end
   end
 end
