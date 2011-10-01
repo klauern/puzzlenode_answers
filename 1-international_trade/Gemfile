@@ -1,8 +1,11 @@
 source :rubygems
 gem "nokogiri", ">=1.5.0"
 gem "fastercsv"
-gem "rspec"
-gem "autotest"
-gem "autotest-growl"
-gem "spork", "=0.9.0.rc4"
-gem "watchr" # might replace autotest
+gem "guard"
+gem "guard-minitest"
+
+#gem "rspec"
+#gem "autotest"
+#gem "autotest-growl"
+#gem "spork", "=0.9.0.rc4"
+#gem "watchr" # might replace autotest

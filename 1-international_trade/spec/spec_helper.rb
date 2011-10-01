@@ -1,24 +1,29 @@
-require 'rubygems'
-require 'spork'
-$: << File.expand_path(File.dirname(__FILE__) + "lib")
+#require 'rubygems'
+#require 'spork'
+#$: << File.expand_path(File.dirname(__FILE__) + "lib")
+$:.unshift File.join(File.dirname(__FILE__), "../lib") # 'lib' directory
 
-Spork.prefork do
+#Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However,
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
 
-require 'rspec'
+#require 'rspec'
+%w{ spec unit mock autorun pride }.each { |w|
+  require "minitest/#{w}"
+}
+
 require 'rates'
 require 'csv_parser'
 require 'xml_parser'
 require 'banker'
 
-end
+#end
 
-Spork.each_run do
+#Spork.each_run do
   # This code will be run each time you run your specs.
 
-end
+#end
 
 # --- Instructions ---
 # Sort the contents of this file into a Spork.prefork and a Spork.each_run
