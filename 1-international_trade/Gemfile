@@ -3,6 +3,9 @@ gem "nokogiri", ">=1.5.0"
 gem "fastercsv"
 gem "guard"
 gem "guard-minitest"
+gem "pry"
+gem "neo4j"
+
 
 #gem "rspec"
 #gem "autotest"
