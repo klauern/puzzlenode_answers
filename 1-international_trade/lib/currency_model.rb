@@ -5,8 +5,8 @@ class Currency
 
   property :name
   rule :all # allows to search for "all" nodes
-  index :name
   # Has many currencies it can convert from or to
-  has_n :currencies
+  has_n(:converts).to(Currency)
 
+  index :name
 end
