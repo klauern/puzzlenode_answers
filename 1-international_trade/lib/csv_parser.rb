@@ -24,5 +24,3 @@ class CsvTransactionParser
   end
 
 end
-
-

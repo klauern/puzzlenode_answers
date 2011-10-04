@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 
-class RatesTest < MiniTest::Unit::TestCase
+class RatesSpec < MiniTest::Spec
   describe "CSV Parser" do
 
     before do

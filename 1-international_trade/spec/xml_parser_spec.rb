@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 
-class XmlParserSpec < MiniTest::Unit::TestCase
+class XmlParserSpec < MiniTest::Spec
 
   describe "XML Parser" do
 

@@ -5,6 +5,10 @@ gem "guard"
 gem "guard-minitest"
 gem "pry"
 gem "neo4j"
+gem "minitest"
+gem "rb-notifu" # windows file system watching for Guard
+gem "rb-fchange"
+
 
 
 #gem "rspec"
