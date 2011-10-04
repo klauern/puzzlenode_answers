@@ -9,14 +9,14 @@ $:.unshift File.join(File.dirname(__FILE__), "../lib") # 'lib' directory
   # need to restart spork for it take effect.
 
 #require 'rspec'
-%w{ spec unit mock autorun pride }.each { |w|
+%w{ spec unit mock autorun }.each { |w|
   require "minitest/#{w}"
 }
 
-require 'rates'
-require 'csv_parser'
-require 'xml_parser'
-require 'banker'
+require_relative '../lib/rates'
+require_relative '../lib/csv_parser'
+require_relative '../lib/xml_parser'
+require_relative '../lib/banker'
 
 #end
 
