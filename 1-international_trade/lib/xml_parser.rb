@@ -1,6 +1,6 @@
-unless RUBY_PLATFORM != "java"
-  gem "nokogiri", "=1.5.0" # earlier version threw Java hardcore errors
-end
+#unless RUBY_PLATFORM != "java"
+  #gem "nokogiri", "=1.5.0" # earlier version threw Java hardcore errors
+#end
 require 'nokogiri'
 require 'bigdecimal'
 

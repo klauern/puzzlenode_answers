@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 
-class XmlParserSpec < MiniTest::Unit::TestCase
+class XmlParserTest < MiniTest::Unit::TestCase
 
   describe "XML Parser" do
 
@@ -13,6 +13,30 @@ class XmlParserSpec < MiniTest::Unit::TestCase
       rates = @xml_parser.get_rates_from_xml(@doc)
       rates.size.must_equal 3
       rates.class.must_equal Nokogiri::XML::NodeSet
+    end
+
+    describe "creating Neo4j Nodes from rates" do
+
+      before do
+        @rates_xml = XmlRatesParser.new('files/SAMPLE_RATES.xml')
+      end
+
+      it "should create two nodes an XML mapping element" do
+        fail "not implemented yet"
+      end
+
+      it "should map a conversion rate on the relationship between two nodes" do
+        fail "not implemented yet"
+      end
+
+      it "should find a mapped conversion from->to" do
+        fail "not implemented yet"
+      end
+
+      it "should find an implicit conversion not mapped from<-to" do
+        fail "not implemented yet"
+      end
+
     end
 
     describe "creating Hashes from rates" do
