@@ -10,3 +10,10 @@ class Currency
 
   index :name
 end
+
+class ConvertsTo
+  include Neo4j::RelationshipMixin
+
+  property :amount
+
+end

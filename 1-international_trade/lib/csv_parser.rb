@@ -1,10 +1,4 @@
-if RUBY_VERSION =~ /1.8/
-  require 'fastercsv'
-  CSV = FasterCSV # Ruby 1.9 uses FasterCSV as the CSV parser, so we just alias it for 1.8 to make things easier.
-else
-  require 'csv'
-end
-
+require 'csv'
 
 class CsvTransactionParser
 

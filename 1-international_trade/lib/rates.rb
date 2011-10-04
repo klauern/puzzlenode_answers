@@ -1,5 +1,5 @@
-require 'csv_parser'
-require 'xml_parser'
+require_relative 'csv_parser'
+require_relative 'xml_parser'
 
 
 class RateConverter
