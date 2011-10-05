@@ -1,3 +1,4 @@
+require 'bundler'
 require 'rake/testtask'
 require 'rake'
 
@@ -16,4 +17,3 @@ task :spec do
   spec_files = Dir['spec/**/*_spec.rb']
   spec_files.each { |f| require f }
 end
-

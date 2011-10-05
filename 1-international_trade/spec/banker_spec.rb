@@ -1,6 +1,6 @@
 require_relative 'spec_helper'
 
-class BankerTests < MiniTest::Unit::TestCase
+class BankerSpec < MiniTest::Spec
 
   describe "Banker" do
     before do

@@ -1,8 +1,6 @@
-#unless RUBY_PLATFORM != "java"
-  #gem "nokogiri", "=1.5.0" # earlier version threw Java hardcore errors
-#end
 require 'nokogiri'
 require 'bigdecimal'
+require_relative 'currency_model'
 
 class XmlRatesParser
   attr_accessor :doc, :rates
@@ -38,6 +36,9 @@ class XmlRatesParser
   def map_rate(element, hash={})
     from = element_for(element, 'from')
     to = element_for(element, 'to')
+    rate = element_for(element, 'conversion')
+
+    Currency.add_conversion(from, to, rate)
 
     h = get_hashes(element)
     if hash[from].nil?
