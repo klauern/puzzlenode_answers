@@ -23,10 +23,3 @@ class Currency
   end
 
 end
-
-class ConvertsTo
-  include Neo4j::RelationshipMixin
-
-  property :rate
-
-end

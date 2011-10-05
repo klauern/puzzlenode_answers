@@ -17,6 +17,7 @@ require_relative '../lib/rates'
 require_relative '../lib/csv_parser'
 require_relative '../lib/xml_parser'
 require_relative '../lib/banker'
+require 'pry'
 
 #end
 
