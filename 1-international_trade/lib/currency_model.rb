@@ -22,4 +22,24 @@ class Currency
     end
   end
 
+  def find_conversion(from, to)
+    f = Currency.find(:name => from).first
+    t = Currency.find(:name => to).first
+    unless f && t
+      raise CurrencyNotFoundError
+    end
+
+    if f.rel?
+      rels = f.rels(:converts_to).outgoing.to_other(t)
+      return rels.first[:rate]
+    else
+      raise ConversionNotFoundError
+    end
+  nd
+
 end
+
+
+class ConversionNotFoundError < StandardError; end
+class CurrencyNotFoundError < StandardError; end
+
