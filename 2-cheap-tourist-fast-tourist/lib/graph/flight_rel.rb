@@ -1,0 +1,3 @@
+class FlightRelationship
+
+end
