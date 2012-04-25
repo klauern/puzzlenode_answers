@@ -2,10 +2,10 @@
 
 require 'time'
 
-def military_difference(future,past)
-  future_time = Time.parse future
-  past_time = Time.parse past
+def military_difference(start_time,end_time)
+  the_start = Time.parse start_time
+  the_end = Time.parse end_time
 
-  return (future_time - past_time) / 60 / 60 # return num hours difference
+  return (the_end - the_start) / 60 / 60 # return num hours difference
 end
 

@@ -38,6 +38,10 @@ GEM
     neo4j-wrapper (0.0.8-java)
       neo4j-core (= 0.0.12)
     orm_adapter (0.0.7)
+    pry (0.9.9.3)
+      coderay (~> 1.0.5)
+      method_source (~> 0.7.1)
+      slop (>= 2.4.4, < 3)
     pry (0.9.9.3-java)
       coderay (~> 1.0.5)
       method_source (~> 0.7.1)
@@ -71,6 +75,7 @@ GEM
 
 PLATFORMS
   java
+  ruby
 
 DEPENDENCIES
   minitest (~> 2.12.1)

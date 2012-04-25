@@ -1,12 +1,12 @@
+require 'pp'
 
-
-def load_input_file(filename="../../files/sample-input.txt")
+def load_input_file(filename="files/sample-input.txt")
   file = File.open filename
   sets = []
   flight_sets = file.readline.chop!
   flight_sets.to_i.times { 
     f = read_flight(file)
-    sets.push f 
+    sets << f
   }
   sets
 end
@@ -15,6 +15,7 @@ def read_flight(file)
   file.readline
   flights = []
   num_lines = file.readline.chop.to_i
+  puts "num lines: #{num_lines}"
   num_lines.times { 
     flight = file.readline.chop
     flight_a = flight.split
