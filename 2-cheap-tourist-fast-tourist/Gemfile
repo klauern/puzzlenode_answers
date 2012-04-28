@@ -4,7 +4,9 @@ gem "neo4j", "~> 2.0.0.alpha.9"
 
 gem "orm_adapter", "~> 0.0.7"
 gem "pry"
-gem 'rake', "~> 0.9.2.2"
+gem "rake", "~> 0.9.2.2"
 gem "minitest", "~> 2.12.1"
+gem "guard"
+gem "guard-minitest"
 
-
+gem 'ruby_gntp'
