@@ -13,7 +13,6 @@ describe "Airport Nodes" do
 
   before do
     Neo4jDbUtils.new_temp_db
-    #Neo4j::Node.index(:name)
   end
 
   after do

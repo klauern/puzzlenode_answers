@@ -4,7 +4,7 @@ require_relative '../../lib/graph/db_utils'
 require_relative '../../lib/graph/airport'
 require_relative "../../lib/graph/flight"
 
-describe "creating flights" do
+describe "creating a flight" do
 
   before do
     Neo4jDbUtils.new_temp_db
@@ -26,5 +26,5 @@ describe "creating flights" do
     rels = a.rels(:outgoing, :flies_to).to_other(Airport.find('name: Z').first)
     rels.to_a[0][:start_time].must_be(:==, "10:30")
   end
-
+  
 end
