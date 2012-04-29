@@ -3,6 +3,7 @@ require_relative "../spec_helper"
 require_relative '../../lib/graph/db'
 require_relative '../../lib/graph/db_utils'
 require_relative '../../lib/graph/airport'
+require_relative "../../lib/graph/flight_graph"
 
 describe "creating a graph from a file" do
 
@@ -11,11 +12,11 @@ describe "creating a graph from a file" do
   end
 
   after do
+    Neo4j.shutdown
     Neo4jDbUtils.rm_db_storage
   end
 
   it "should create an airport and flight for an input line" do
-    fail
 
     graph = FlightGraph.new
 
@@ -31,4 +32,4 @@ describe "creating a graph from a file" do
     flight[:cost].must_be(:==, 100)
     flight[:flight_time].must_be(:==, 2)
   end
-
+end
