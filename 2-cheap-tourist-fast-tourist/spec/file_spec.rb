@@ -1,5 +1,6 @@
 require_relative 'spec_helper'
-require_relative '../lib/file_parser'
+
+require 'file_parser'
 
 describe "parsing input files" do
   before do
@@ -7,8 +8,6 @@ describe "parsing input files" do
   end
 
   describe "parsing test cases" do
-
-
     it "should load all test cases" do
       @cases.size.must_equal 2
     end
@@ -20,7 +19,6 @@ describe "parsing input files" do
   end
 
   describe "mapping flights" do
-
     it "should map all parts of a flight" do
       flight = @cases[0][1]
       flight[:from].must_equal "B"

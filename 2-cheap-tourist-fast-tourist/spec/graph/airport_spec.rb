@@ -1,8 +1,9 @@
 require_relative "../spec_helper"
-require_relative '../../lib/graph/db'
-require_relative '../../lib/graph/db_utils'
-require_relative '../../lib/graph/airport'
-require_relative '../../lib/graph/flight_graph'
+
+require 'graph/db'
+require 'graph/db_utils'
+require 'graph/airport'
+require 'graph/flight_graph'
 
 
 describe "creating airport nodes" do

@@ -27,11 +27,14 @@ class FlightGraph
     start = time_and_cost[0]
     stop = time_and_cost[1]
     cost = time_and_cost[2]
-    require 'pry'
-    binding.pry
-    Flight.new(:flies_to, from, to, :start_time => start,
-               :end_time => stop,
+    Flight.new(:flies_to, from, to, :takeoff => start,
+               :landing => stop,
                :flight_time => military_difference(start, stop),
                :cost => cost.to_f)
+  end
+
+
+  def airport(name)
+    get_or_create_airport(name)
   end
 end

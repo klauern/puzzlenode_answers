@@ -24,11 +24,11 @@ describe "creating a graph from a file" do
     graph.read_flight(input)
     b = graph.airport("B")
     rels = b.rels(:outgoing, :flies_to).to_other(Airport.find('name: Z').first)
-    require 'pry'
-    binding.pry
+    #require 'pry'
+    #binding.pry
     flight = rels.to_a[0]
-    flight[:start_time].must_be(:==, "11:30")
-    flight[:end_time].must_be(:==, "13:30")
+    flight[:takeoff].must_be(:==, "11:30")
+    flight[:landing].must_be(:==, "13:30")
     flight[:cost].must_be(:==, 100)
     flight[:flight_time].must_be(:==, 2)
   end
