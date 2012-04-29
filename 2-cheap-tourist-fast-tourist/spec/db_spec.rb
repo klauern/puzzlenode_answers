@@ -22,18 +22,15 @@ describe "multiple databases per test set" do
     tx.finish
     Neo4j.shutdown
     Neo4jDbUtils.rm_db_storage
-    tx = Neo4j::Transaction.new
-    Neo4j::Node.find(:name => 'nick k').first.must_be_nil
+    Neo4j::Node.ref_node.must_be_nil
   end
 
   it "should create a node" do
-    tx = Neo4j::Transaction.new
-    Neo4j::Node.new(:name => 'nick k')
-    tx.success
-    tx.finish
+    tx = Neo4j::Transaction.run {
+    Neo4j::Node.new(name: 'nick k')
+    }
     Neo4j.shutdown
-    Neo4j::Node.find(:name => 'nick k').first.wont_be_nil
-    Neo4j.shutdown
+    Neo4j::Node.find('name: "nick k"').first.wont_be_nil
     Neo4jDbUtils.rm_db_storage
   end
 
