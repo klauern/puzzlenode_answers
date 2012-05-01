@@ -12,6 +12,7 @@ class FlightGraph
     create_flight(from, to, pieces[2..4])
   end
 
+  # get an airport from the graph, or create if it doesn't exist
   def get_or_create_airport(name)
     airport = Airport.find("name: #{name}").first
     if airport.nil? 
@@ -22,6 +23,7 @@ class FlightGraph
     airport
   end
 
+  # Add a flight to the graph
   def create_flight(from, to, time_and_cost)
     start = time_and_cost[0]
     stop = time_and_cost[1]
@@ -47,8 +49,25 @@ class FlightGraph
     end
   end
 
+  def create_flights_from_array_hash(flights)
+    flights.each { |flight|
+      create_flight_from_hash(flight)
+    }
+  end
 
   def airport(name)
     get_or_create_airport(name)
   end
+
+  def fastest_path(from, to)
+    # Not allowed to use any of the Algos, it seems, as they prevent passing
+    # in any sort of Traverser that you'd have to supply to validate/invalidate
+    # paths.
+  end
+
+  def cheapest_path(from, to)
+    # Can't do this without a Traverser that you provide the traverser logic
+    # for.
+  end
 end
+

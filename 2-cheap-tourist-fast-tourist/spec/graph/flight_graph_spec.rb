@@ -1,9 +1,10 @@
 
-require_relative "../spec_helper"
+require_relative '../spec_helper'
 require_relative '../../lib/graph/db'
 require_relative '../../lib/graph/db_utils'
 require_relative '../../lib/graph/airport'
-require_relative "../../lib/graph/flight_graph"
+require_relative '../../lib/graph/flight_graph'
+require_relative '../../lib/file_parser'
 
 describe "creating a graph from a file" do
 
@@ -24,8 +25,6 @@ describe "creating a graph from a file" do
     graph.read_flight(input)
     b = graph.airport("B")
     rels = b.rels(:outgoing, :flies_to).to_other(Airport.find('name: Z').first)
-    #require 'pry'
-    #binding.pry
     flight = rels.to_a[0]
     flight[:takeoff].must_be(:==, "11:30")
     flight[:landing].must_be(:==, "13:30")
@@ -46,6 +45,17 @@ describe "creating a graph from a file" do
     }
   end
 
+  it "should create a graph for a set of inputs" do
+    graph = FlightGraph.new
+    flights = FileParser.load_input_file
+    graph.create_flights_from_array_hash(flights[0])
+    require 'pry'
+    binding.pry
+    # TODO: get count of airports, and flights
+    # TODO: should get flight graph for a couple somehow
+    fail "not implemented properly yet"
+  end
+
 
   describe "path finding" do
 
@@ -64,6 +74,5 @@ describe "creating a graph from a file" do
     it "should find the quickest flights" do
       fail "not implemented"
     end
-
   end
 end

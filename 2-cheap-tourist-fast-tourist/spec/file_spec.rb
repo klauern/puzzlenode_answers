@@ -4,7 +4,7 @@ require 'file_parser'
 
 describe "parsing input files" do
   before do
-    @cases = load_input_file("files/sample-input.txt")
+    @cases = FileParser.load_input_file("files/sample-input.txt")
   end
 
   describe "parsing test cases" do
