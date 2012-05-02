@@ -51,6 +51,7 @@ describe "creating a graph from a file" do
     graph.create_flights_from_array_hash(flights[1])
     a = Airport.find('name: A').first
     paths = a.outgoing(:flies_to).eval_paths { |path|
+      puts path
       :include_and_continue
       # Exclude short paths
       #if (graph.exclude_short_paths(path) == :exclude_and_continue)
