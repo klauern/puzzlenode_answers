@@ -48,7 +48,17 @@ describe "creating a graph from a file" do
   it "should create a graph for a set of inputs" do
     graph = FlightGraph.new
     flights = FileParser.load_input_file
-    graph.create_flights_from_array_hash(flights[0])
+    graph.create_flights_from_array_hash(flights[1])
+    a = Airport.find('name: A').first
+    paths = a.outgoing(:flies_to).eval_paths { |path|
+      :include_and_continue
+      # Exclude short paths
+      #if (graph.exclude_short_paths(path) == :exclude_and_continue)
+        #:exclude_and_continue
+      #else
+        #:include_and_continue
+      #end
+    }
     require 'pry'
     binding.pry
     # TODO: get count of airports, and flights
