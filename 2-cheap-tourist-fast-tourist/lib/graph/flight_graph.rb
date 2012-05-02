@@ -70,15 +70,5 @@ class FlightGraph
     # for.
   end
 
-
-  # Exclude all paths that are
-  # start --> end
-  # where end is NOT Z
-  # and Start is NOT A
-  def exclude_short_paths(path)
-    if (path.length <= 2 && path.end_node != "Z")
-      :exclude_and_continue
-    end
-  end
 end
 

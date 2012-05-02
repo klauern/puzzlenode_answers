@@ -3,15 +3,15 @@ require_relative '../military_time'
 
 class Path
 
-  def evaluate_path(path)
+  def self.evaluate_path(path)
 
   end
 
-  def layover?(landing, takeoff)
+  def self.layover?(landing, takeoff)
     military_difference(landing, takeoff) > 0
   end
 
-  def path_too_short(path)
+  def self.path_too_short(path)
     path.length >= 2 && path.end_node.name == "Z"
   end
 
