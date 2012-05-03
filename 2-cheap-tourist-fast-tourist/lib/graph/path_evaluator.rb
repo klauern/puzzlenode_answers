@@ -3,7 +3,7 @@ require_relative '../military_time'
 
 # Utility methods for using the Traverser API to evaluate good and bad paths.
 # See Neo4j's documentation: http://docs.neo4j.org/chunked/stable/tutorial-traversal-java-api.html
-class Path
+class PathEvaluator
 
   def self.evaluate_path(path)
     # QUESTION: not sure if I need this check, since the default return 
