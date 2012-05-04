@@ -51,6 +51,7 @@ class FlightGraph
 
   def create_flights_from_array_hash(flights)
     flights.each { |flight|
+      puts "reading #{flight}"
       create_flight_from_hash(flight)
     }
   end

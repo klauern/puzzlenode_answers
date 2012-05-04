@@ -15,7 +15,8 @@ class PathEvaluator
     elsif touches_end_node?(path)
       return :include_and_prune
     else
-      return :exclude_and_continue
+      #return :exclude_and_continue
+      return :include_and_continue
     end
   end
 
