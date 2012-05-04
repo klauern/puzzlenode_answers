@@ -28,7 +28,7 @@ class PathEvaluator
   # Is the path too short (that is, is it only 2 links deep and 
   # doesn't end at "Z"
   def self.path_too_short?(path)
-    path.length < 2 && path.end_node.name != "Z"
+    path.length < 2 && path.end_node[:name] != "Z"
   end
 
   # Does it touch the end node at all?
@@ -39,6 +39,7 @@ class PathEvaluator
   # Do the connecting flights overlap?  That is, does
   # the landing flight land AFTER the takeoff of it's next connection?
   def self.connecting_flights_overlap?(path)
+    false # TODO: implement
   end
 
 end

@@ -1,4 +1,5 @@
 
+require 'pry'
 require_relative '../spec_helper'
 require_relative '../../lib/graph/db'
 require_relative '../../lib/graph/db_utils'
@@ -7,7 +8,7 @@ require_relative '../../lib/graph/flight_graph'
 require_relative '../../lib/file_parser'
 require_relative '../../lib/graph/path_evaluator'
 
-describe "evaluating a path" do
+describe "graph paths" do
 
   before do
     Neo4jDbUtils.new_temp_db
@@ -23,18 +24,16 @@ describe "evaluating a path" do
     Neo4jDbUtils.rm_db_storage
   end
 
-  it "should reject short paths that don't connect to the end airport" do
-    paths = @a.outgoing(:flies_to).eval_paths { |path|
-      puts path
-      return :include_and_continue
-    }.include_start_node
-    require 'pry'
-    binding.pry
-    fail "not implemented properly yet"
-  end
 
+  describe "evaluating a path" do
 
-  describe "path finding" do
+    it "should reject short paths that don't connect to the end airport" do
+      paths = @a.outgoing(:flies_to).depth(:all).unique(:node_path).eval_paths { |path|
+        PathEvaluator.evaluate_path(path)
+      }
+      binding.pry
+      fail "not implemented properly yet"
+    end
 
     it "should find paths from A to Z" do
       fail "not implemented"
@@ -53,3 +52,4 @@ describe "evaluating a path" do
     end
   end
 end
+
