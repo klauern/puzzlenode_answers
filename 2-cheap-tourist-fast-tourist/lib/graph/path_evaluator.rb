@@ -34,7 +34,7 @@ class PathEvaluator
 
   # Does it touch the end node at all?
   def self.touches_end_node?(path)
-    path.end_node.name == "Z"
+    path.end_node[:name] == "Z"
   end
 
   # Do the connecting flights overlap?  That is, does
