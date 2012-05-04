@@ -10,3 +10,4 @@ gem "minitest", "~> 2.12.1"
 gem "guard"
 gem "guard-minitest"
 gem 'ruby_gntp'
+gem 'guard-ctags-bundler'
