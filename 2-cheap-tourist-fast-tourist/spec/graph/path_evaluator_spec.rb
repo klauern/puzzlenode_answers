@@ -28,7 +28,8 @@ describe "graph paths" do
   describe "evaluating a path" do
 
     it "should reject short paths that don't connect to the end airport" do
-      paths = @a.outgoing(:flies_to).depth(:all).unique(:node_path).eval_paths { |path|
+      paths = @a.outgoing(:flies_to).depth(:all).unique(:node_path).filter { |path|
+        path.end_node[:name] == "Z" }.eval_paths { |path|
         PathEvaluator.evaluate_path(path)
       }
       binding.pry
