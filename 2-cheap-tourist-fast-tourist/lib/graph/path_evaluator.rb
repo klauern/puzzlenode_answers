@@ -40,6 +40,16 @@ class PathEvaluator
   # Do the connecting flights overlap?  That is, does
   # the landing flight land AFTER the takeoff of it's next connection?
   def self.connecting_flights_overlap?(path)
+    previous_landing = nil
+    path.relationships.each { |rel|
+      if previous_landing == nil
+        previous_landing = rel[:landing]
+      elsif military_difference(previous_landing, rel[:takeoff]) < 0
+        return true
+      else
+        previous_landing = rel[:landing]
+      end
+    }
     false # TODO: implement
   end
 
