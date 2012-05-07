@@ -50,7 +50,45 @@ class PathEvaluator
         previous_landing = rel[:landing]
       end
     }
-    false # TODO: implement
+    false
   end
 
+
+  # Find the cheapest path from a set of paths
+  # Assumed that each path has been previously validated
+  def self.cheapest_path(paths)
+    cheapest = paths.first
+    paths.each { |p|
+      if cost_of_path(cheapest) > cost_of_path(p)
+        cheapest = p
+      end
+    }
+    cheapest
+  end
+
+
+  # Find the cost of flights for a given path
+  def self.cost_of_path(path)
+    total = 0.0
+    path.relationships.each { |rel|
+      total += rel[:cost]
+    }
+    total
+  end
+
+  # Find the flight duration for a path of flights
+  def self.duration_of_flights(path)
+    military_difference(path.relationships.first[:takeoff],
+                        path.last_relationship[:landing])
+  end
+
+  def self.quickest_path(paths)
+    quickest = paths.first
+    paths.each { |p|
+      if duration_of_flights(quickest) > duration_of_flights(p)
+        quickest = p
+      end
+    }
+    quickest
+  end
 end

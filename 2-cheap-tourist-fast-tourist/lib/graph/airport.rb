@@ -10,4 +10,10 @@ class Airport
   has_n :flights
 
   index :name
+
+
+  def self.find_start_node
+    self.find('name: A').first
+  end
+
 end

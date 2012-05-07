@@ -62,28 +62,11 @@ describe "creating a graph from a file" do
     }
     require 'pry'
     binding.pry
+    
     # TODO: get count of airports, and flights
     # TODO: should get flight graph for a couple somehow
     fail "not implemented properly yet"
   end
 
 
-  describe "path finding" do
-
-    it "should find paths from A to Z" do
-      fail "not implemented"
-    end
-
-    it "shouldn't find a connecting flight takeoff BEFORE previous landing" do
-      fail "not implemented"
-    end
-
-    it "should find the cheapest flight" do
-      fail "not implemented"
-    end
-
-    it "should find the quickest flights" do
-      fail "not implemented"
-    end
-  end
 end
