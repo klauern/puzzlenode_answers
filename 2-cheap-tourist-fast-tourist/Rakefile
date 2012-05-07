@@ -11,3 +11,7 @@ Rake::TestTask.new do |t|
     t.pattern = "spec/**/*_spec.rb"
 end
 
+task :coderatio do
+  puts Dir["spec/**/*_spec.rb"].size.to_f / Dir["lib/**/*.rb"].size.to_f
+end
+
