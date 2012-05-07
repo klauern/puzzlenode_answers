@@ -81,11 +81,6 @@ describe "graph paths with provided input file" do
 
     cheapest = PathEvaluator.cheapest_path(@paths)
     PathEvaluator.cost_of_path(cheapest).must_equal(200.00)
-
-    # TODO: Create two sets of flights, A -> C -> Z and A -> B -> Z
-    # where A -> C -> Z costs MORE than A -> B -> Z. Verify A -> B -> Z
-    # is found when calling #cheapest_flight
-    #fail "not implemented"
   end
 
   it "should find the quickest flights" do
@@ -100,9 +95,32 @@ describe "graph paths with provided input file" do
 
     quickest = PathEvaluator.quickest_path(@paths)
     PathEvaluator.duration_of_flights(quickest).must_equal(2.0)
+  end
+
+
+  # TODO: don't have this figured out, but I want to play in here a bit
+  # I'm going to use this to figure out what I need to test for multiple
+  # paths for best flight, best cost/time.
+  it "should let me find the best flights" do
+    @graph = FlightGraph.new
+    @flights = FileParser.load_input_file("files/input.txt")
+    @graph.create_flights_from_array_hash(@flights[0])
+    @a = Airport.find_start_node
+    @traverser = @a.outgoing(:flies_to).depth(:all).unique(:node_path).filter { |path|
+      path.end_node[:name] == "Z" }.eval_paths { |path|
+        PathEvaluator.evaluate_path(path)
+      }
+    @paths = @traverser.paths.to_a
+
+    quickest = PathEvaluator.quickest_path(@paths)
+    PathEvaluator.duration_of_flights(quickest).must_equal(2.0)
     # TODO: As in the finding the cheapest flight, create two flights
     # where one is shorter in overall time than the other, and verify
     # that it is picked.
+    
+    #require 'pry'
+    #binding.pry
+    fail "so I can find the spec"
   end
 
 end
