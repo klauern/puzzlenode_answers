@@ -42,14 +42,22 @@ describe "graph paths" do
     end
 
     it "shouldn't find a connecting flight takeoff BEFORE previous landing" do
+      # TODO: create a minimum relationship A -> C -> Z where the flight takes of
+      # on C -> AFTER the flight A -> C lands.
       fail "not implemented"
     end
 
     it "should find the cheapest flight" do
+      # TODO: Create two sets of flights, A -> C -> Z and A -> B -> Z
+      # where A -> C -> Z costs MORE than A -> B -> Z. Verify A -> B -> Z
+      # is found when calling #cheapest_flight
       fail "not implemented"
     end
 
     it "should find the quickest flights" do
+      # TODO: As in the finding the cheapest flight, create two flights
+      # where one is shorter in overall time than the other, and verify
+      # that it is picked.
       fail "not implemented"
     end
   end
