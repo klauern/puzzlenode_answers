@@ -84,9 +84,17 @@ class PathEvaluator
 
   def self.quickest_path(paths)
     quickest = paths.first
+    old_quickest = duration_of_flights(paths.first)
     paths.each { |p|
-      if duration_of_flights(quickest) > duration_of_flights(p)
+      new_quickest = duration_of_flights(p)
+      if new_quickest < old_quickest
         quickest = p
+        old_quickest = new_quickest
+      elsif new_quickest == old_quickest
+        if cost_of_path(p) < cost_of_path(quickest)
+          quickest = p
+          old_quickest = new_quickest
+        end
       end
     }
     quickest

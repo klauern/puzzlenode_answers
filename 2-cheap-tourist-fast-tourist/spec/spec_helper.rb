@@ -12,5 +12,10 @@ def i str, &block
 end
 
 
-Neo4j::Config[:storage_path] = File.join(Dir.tmpdir, "minispec_db")
-FileUtils.rm_rf Neo4j::Config[:storage_path]
+#def new_temp_location
+  #Neo4j::Config[:storage_path] = File.join(Dir.tmpdir, "minispec_db")
+#end
+
+#def rm_db_storage
+  #FileUtils.rm_rf Neo4j::Config[:storage_path]
+#end
