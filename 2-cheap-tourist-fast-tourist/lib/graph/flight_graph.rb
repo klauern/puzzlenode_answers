@@ -60,5 +60,14 @@ class FlightGraph
     get_or_create_airport(name)
   end
 
+  def evaluate_all_paths_in_graph()
+    a = Airport.find_start_node
+    traverser = a.outgoing(:flies_to).depth(:all).unique(:node_path).filter { |path|
+      path.end_node[:name] == "Z" }.eval_paths { |path|
+        PathEvaluator.evaluate_path(path)
+      }
+      traverser.paths.to_a
+  end
+
 end
 

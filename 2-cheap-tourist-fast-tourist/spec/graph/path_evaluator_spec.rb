@@ -113,8 +113,8 @@ describe "graph paths with provided input file" do
     # where one is shorter in overall time than the other, and verify
     # that it is picked.
 
-    #require 'pry'
-    #binding.pry
+    require 'pry'
+    binding.pry
     fail "so I can find the spec"
   end
 

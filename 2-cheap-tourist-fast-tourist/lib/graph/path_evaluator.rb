@@ -99,4 +99,12 @@ class PathEvaluator
     }
     quickest
   end
+
+  def self.start_time_of_path(path)
+    path.relationships.first[:takeoff]
+  end
+
+  def self.end_time_of_path(path)
+    path.last_relationship[:landing]
+  end
 end
