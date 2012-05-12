@@ -6,8 +6,8 @@ require 'graph/db_utils'
 require 'graph/flight_graph'
 require 'graph/path_evaluator'
 
-def process()
-  $file = FileParser.load_input_file("files/input.txt")
+def process(input_file="files/sample-input.txt")
+  $file = FileParser.load_input_file(input_file)
 
   $output_file = File.new("output_file", "w")
 
@@ -43,4 +43,4 @@ def output_flight_info(path)
   "#{takeoff} #{landing} #{cost}"
 end
 
-process
+process("files/input.txt")
