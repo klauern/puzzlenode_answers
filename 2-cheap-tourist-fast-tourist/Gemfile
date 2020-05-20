@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-gem "neo4j", "~> 2.0.0.alpha.9"
+gem "neo4j", "~> 8.0.16.0.0"
 
 gem "jruby-openssl"
 gem "orm_adapter", "~> 0.0.7"
